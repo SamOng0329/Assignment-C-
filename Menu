@@ -11,18 +11,21 @@ int main()
     double price;
     int quantity;
     double orderTotal = 0.0;
+    double tax = 0.0;
+    double grandTotal = 0.0;
     string addOn;
 
-    cout << "                      ===================================" << endl;
-    cout << "                      |                                 |" << endl;
-    cout << "                      |        OOOOO   SSSSS            |" << endl;
-    cout << "                      |       O     O  S                 |" << endl;
-    cout << "                      |       O     O   SSSSS             |" << endl;
-    cout << "                      |       O     O       S           |" << endl;
-    cout << "                      |        OOOOO   SSSSS            |" << endl;
-    cout << "                      |                                 |" << endl;
-    cout << "                      |    ORDERING SYSTEM 1.0          |" << endl;
-    cout << "                      |_________________________________|" << endl;
+    cout << "                                        ===================================" << endl;
+    cout << "                                        |                                 |" << endl;
+    cout << "                                        |          OOOOO    SSSSS         |" << endl;
+    cout << "                                        |         O     O  S              |" << endl;
+    cout << "                                        |         O     O   SSSSS         |" << endl;
+    cout << "                                        |         O     O        S        |" << endl;
+    cout << "                                        |          OOOOO    SSSSS         |" << endl;
+    cout << "                                        |                                 |" << endl;
+    cout << "                                        |       ORDERING SYSTEM 1.0       |" << endl;
+    cout << "                                        |_________________________________|" << endl;
+
 
     cout << endl << "1. Order Entry" << endl;
     cout << "2. Reporting" << endl;
@@ -47,25 +50,20 @@ int main()
                 cin >> seat;
 
                 switch (seat) {
-                case 1:
-                    price = 149.0;
-                    cout << "Selected: ROCKZONE" << endl;
+                case 1: 
+                    price = 149.0; cout << "Selected: ROCKZONE" << endl; 
                     break;
                 case 2:
-                    price = 1299.0;
-                    cout << "Selected: VIP" << endl;
+                    price = 1299.0; cout << "Selected: VIP" << endl; 
                     break;
-                case 3:
-                    price = 649.0;
-                    cout << "Selected: PLATINUM" << endl;
+                case 3: 
+                    price = 649.0; cout << "Selected: PLATINUM" << endl; 
                     break;
-                case 4:
-                    price = 219.0;
-                    cout << "Selected: GOLD ZONE" << endl;
+                case 4: 
+                    price = 219.0; cout << "Selected: GOLD ZONE" << endl; 
                     break;
-                case 5:
-                    price = 99.0;
-                    cout << "Selected: SILVER ZONE" << endl;
+                case 5: 
+                    price = 99.0; cout << "Selected: SILVER ZONE" << endl; 
                     break;
                 default:
                     cout << "Invalid seat selected." << endl;
@@ -102,27 +100,65 @@ int main()
 
             } while (true);
 
-            cout << endl << "Proceeding to cart." << endl;
-            cout << "Your final order total is: RM " << orderTotal << endl << endl;
+            tax = orderTotal * 0.06;
+            grandTotal = orderTotal + tax;
 
-            orderEntry = 2;
-            continue;
+            cout << endl << "Proceeding to cart." << endl;
+            cout << fixed << setprecision(2);
+            cout << "Subtotal: RM " << orderTotal << endl;
+            cout << "6% Tax:   RM " << tax << endl;
+            cout << "Total:    RM " << grandTotal << endl << endl;
+
+            int paymentMethod;
+            while (true) {
+                cout << "Please select your payment method:" << endl;
+                cout << "1. Credit Card" << endl;
+                cout << "2. Online Banking" << endl;
+                cout << "3. E-Wallet" << endl;
+                cout << "Enter payment method (1-3): ";
+                cin >> paymentMethod;
+
+                if (paymentMethod >= 1 && paymentMethod <= 3) {
+                    break;
+                }
+                else {
+                    cout << "Invalid input. Please enter a number between 1 and 3." << endl;
+                }
+            }
+
+            switch (paymentMethod) {
+            case 1: 
+                cout << "You selected: Credit Card" << endl;
+                break;
+            case 2: 
+                cout << "You selected: Online Banking" << endl; 
+                break;
+            case 3: 
+                cout << "You selected: E-Wallet" << endl; 
+                break;
+            }
+
+
+            cout << "Payment successful! Thank you for your purchase." << endl << endl;
         }
+
         else if (orderEntry == 2) {
             if (orderTotal > 0) {
                 cout << endl << "--- Current Order Report ---" << endl;
                 cout << fixed << setprecision(2);
-                cout << "Grand Total: RM " << orderTotal << endl;
+                cout << "Grand Total: RM " << grandTotal << endl;
                 cout << "----------------------------" << endl << endl;
             }
             else {
                 cout << endl << "No order placed yet." << endl << endl;
             }
         }
+
         else if (orderEntry == 3) {
             cout << "Exiting program. Thank you!" << endl;
             break;
         }
+
         else {
             cout << "Invalid input. Please enter 1-3." << endl;
         }
