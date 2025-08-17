@@ -69,12 +69,17 @@ int main()
                     cout << "Selected: SILVER ZONE" << endl; 
                     break;
                 default:
-                    cout << "Invalid seat selected. Please enter 1-3." << endl;
+                    cout << "Invalid seat selected. Please enter 1-5." << endl;
                     continue;
                 }
 
                 cout << "Please enter quantities: ";
                 cin >> quantity;
+                while (quantity <= 0) {
+                    cout << "Invalid quantity. Please enter a positive number." << endl;
+                    cout << "Please enter quantities: ";
+                    cin >> quantity;
+                }
 
                 double itemTotal = quantity * price;
                 orderTotal += itemTotal;
@@ -98,9 +103,11 @@ int main()
                     total = orderTotal + tax;
 
                     cout << endl << "Proceeding to cart." << endl;
-                    cout << "Subtotal: RM " << orderTotal << endl;
-                    cout << "6% Tax:   RM " << tax << endl;
-                    cout << "Total:    RM " << total << endl << endl;
+                    cout << "------------------------------------------" << endl;
+                    cout << left << setw(30) << "Subtotal:" << right << "RM " << setw(8) << orderTotal << endl;
+                    cout << left << setw(30) << "6% Tax:" << right << "RM " << setw(8) << tax << endl;
+                    cout << "------------------------------------------" << endl;
+                    cout << left << setw(30) << "Total:" << right << "RM " << setw(8) << total << endl << endl;
 
                     while (true) {
                         cout << "Please select your payment method:" << endl;
@@ -110,7 +117,8 @@ int main()
                         cout << "Enter payment method (1-3): ";
                         cin >> paymentMethod;
 
-                        if (paymentMethod >= 1 && paymentMethod <= 3) break;
+                        if (paymentMethod >= 1 && paymentMethod <= 3) 
+                            break;
                         cout << "Invalid input. Please enter 1-3." << endl;
                     }
 
@@ -133,9 +141,18 @@ int main()
         }
         else if (orderEntry == 2) {
             if (orderTotal > 0) {
-                cout << endl << "--- Order Report ---" << endl;
-                cout << "Total: RM " << total << endl;
-                cout << "----------------------------" << endl << endl;
+                cout << endl << "-------------- Order Report --------------" << endl;
+                cout << left << setw(15) << "Seat Type" << right << setw(10) << "Quantity" << right << setw(15) << "Item Total" << endl;
+
+                cout << "------------------------------------------" << endl;
+
+            
+
+                cout << "------------------------------------------" << endl;
+                cout << left << setw(30) << "Subtotal:" << right << "RM " << setw(8) << orderTotal << endl;
+                cout << left << setw(30) << "6% Tax:" << right << "RM " << setw(8) << tax << endl;
+                cout << "------------------------------------------" << endl;
+                cout << left << setw(30) << "Total:" << right << "RM " << setw(8) << total << endl << endl;
             }
             else {
                 cout << endl << "No order placed yet." << endl << endl;
